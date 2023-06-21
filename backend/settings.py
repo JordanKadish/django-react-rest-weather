@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 from os import getenv
+from django.db.backends.postgresql.psycopg_any import IsolationLevel
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -38,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'weather'
 ]
 
 MIDDLEWARE = [
@@ -50,7 +52,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'backend.urls'
+ROOT_URLCONF = 'urls'
 
 TEMPLATES = [
     {
@@ -68,7 +70,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'backend.wsgi.application'
+WSGI_APPLICATION = 'wsgi.application'
 
 
 # Database
@@ -78,15 +80,40 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         "OPTIONS": {
-            "service": "my_service",
-            "passfile": ".my_pgpass",
+            # from:
+            # https://docs.djangoproject.com/en/4.2/ref/databases/#optimizing-postgresql-s-configuration
+            # optimization options specific to postgres
+            'client_encoding': 'UTF8',
+            # this is the default isolation level, adding explicitly
+            'isolation_level': IsolationLevel.READ_COMMITTED
+
+            # can specify a .pg_service.conf file
+            # with host, username, port etc in it
+            # "service": "my_service",
+            
+            # can specify a passfile 
+            # string eg: localhost:5432:NAME:USER:PASSWORD
+            # "passfile": ".my_pgpass",
+            
+            # TODO: understand the difference between client side and server side bindings
+            # https://www.psycopg.org/psycopg3/docs/advanced/cursors.html#client-side-binding-cursors
+            # https://www.psycopg.org/psycopg3/docs/basic/from_pg2.html#server-side-binding
+            # "server_side_binding": True,
         },
         'NAME': 'weatherdb',
         # TODO: set in Dockerfile
-        'USER': getenv('DB_USER'),
-        'PASSWORD': getenv('DB_PASSWORD'),
-        # 'HOST': 'localhost',
-        # 'PORT': '1234',
+        # 'USER': getenv('DB_USER'),
+        # 'PASSWORD': getenv('DB_PASSWORD'),
+        'USER': 'jordan',
+        'PASSWORD': 'Jordan69',
+        'HOST': 'localhost',
+        'PORT': '5432'
+        # could add a testdb here:
+        # https://docs.djangoproject.com/en/4.2/ref/settings/#test
+        # "TEST": {
+        #     "NAME": "mytestdatabase",
+        #     # etc
+        # },
     }
 }
 
@@ -115,7 +142,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Africa/Johannesburg'
 
 USE_I18N = True
 
