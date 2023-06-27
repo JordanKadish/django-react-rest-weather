@@ -1,0 +1,30 @@
+{
+  "lat": -33.866,
+  "lon": 18.5344,
+  "timezone": "Africa/Johannesburg",
+  "timezone_offset": 7200,
+  "current": {
+    "dt": 1687831506,
+    "sunrise": 1687845090,
+    "sunset": 1687880756,
+    "temp": 15.1,
+    "feels_like": 14.57,
+    "pressure": 1012,
+    "humidity": 73,
+    "dew_point": 10.3,
+    "uvi": 0,
+    "clouds": 97,
+    "visibility": 10000,
+    "wind_speed": 5.36,
+    "wind_deg": 215,
+    "wind_gust": 10.28,
+    "weather": [
+      {
+        "id": 804,
+        "main": "Clouds",
+        "description": "overcast clouds",
+        "icon": "04n"
+      }
+    ]
+  }
+}

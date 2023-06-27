@@ -100,14 +100,11 @@ DATABASES = {
             # https://www.psycopg.org/psycopg3/docs/basic/from_pg2.html#server-side-binding
             # "server_side_binding": True,
         },
-        'NAME': 'weatherdb',
-        # TODO: set in Dockerfile
-        # 'USER': getenv('DB_USER'),
-        # 'PASSWORD': getenv('DB_PASSWORD'),
-        'USER': 'jordan',
-        'PASSWORD': 'Jordan69',
-        'HOST': 'localhost',
-        'PORT': '5432'
+        'NAME': getenv('DATABASE'),
+        'USER': getenv('DB_USER'),
+        'PASSWORD': getenv('DB_PASSWORD'),
+        'HOST': getenv('HOST'),
+        'PORT': getenv('PORT')
         # could add a testdb here:
         # https://docs.djangoproject.com/en/4.2/ref/settings/#test
         # "TEST": {

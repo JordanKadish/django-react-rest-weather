@@ -26,5 +26,6 @@ def json_weather_main():
     print(resp.json())
 
 if __name__=='__main__':
+    # TODO: implement LOGGER
     html_weather_main()
     json_weather_main()
